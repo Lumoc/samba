@@ -7,7 +7,7 @@ RUN echo "deb http://ftp.de.debian.org/debian stretch main" > /etc/apt/sources.l
 RUN apt-get update && apt-get upgrade -y
 
 # Install samba
-RUN apt-get install --fix-missing samba samba-common shadow tini -y
+RUN apt-get install --fix-missing samba samba-common -y
 
 RUN adduser -D -G users -H -S -g 'Samba User' -h /tmp smbuser && \
     file="/etc/samba/smb.conf" && \
@@ -52,4 +52,4 @@ HEALTHCHECK --interval=60s --timeout=15s \
 
 VOLUME ["/etc/samba"]
 
-ENTRYPOINT ["/sbin/tini", "--", "/usr/bin/samba.sh"]
+ENTRYPOINT ["/usr/bin/samba.sh"]
