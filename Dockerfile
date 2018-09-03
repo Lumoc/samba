@@ -9,7 +9,7 @@ RUN apt-get update && apt-get upgrade -y
 # Install samba
 RUN apt-get install --fix-missing samba samba-common -y
 
-RUN adduser -disabled-login -group users -H -S -group 'Samba User' -h /tmp smbuser && \
+RUN adduser --quiet --disabled-login --shell /bin/false --home /tmp/ smbuser -q && \
     file="/etc/samba/smb.conf" && \
     sed -i 's|^;* *\(log file = \).*|   \1/dev/stdout|' $file && \
     sed -i 's|^;* *\(load printers = \).*|   \1no|' $file && \
