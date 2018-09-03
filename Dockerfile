@@ -7,8 +7,7 @@ RUN echo "deb http://ftp.de.debian.org/debian stretch main" > /etc/apt/sources.l
 RUN apt-get update && apt-get upgrade -y
 
 # Install samba
-RUN apk --no-cache --no-progress upgrade && \
-    apk --no-cache --no-progress add bash samba shadow tini && \
+RUN apt-get install bash samba shadow tini && \
     adduser -D -G users -H -S -g 'Samba User' -h /tmp smbuser && \
     file="/etc/samba/smb.conf" && \
     sed -i 's|^;* *\(log file = \).*|   \1/dev/stdout|' $file && \
